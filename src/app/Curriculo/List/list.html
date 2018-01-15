@@ -1,0 +1,40 @@
+<div class="container text-left">
+  <div class="row">
+      <div class="col-md-6">
+          <h1>Banco de currículos</h1>
+      </div>
+      <div class="col-md-2 offset-md-4 text-right">
+        <router-link to='/create'>
+          <button type="button" class="btn btn-outline-primary bottom">Cadastrar</button>
+        </router-link>
+      </div>
+  </div>
+  <div class="row">
+    <table class="table table-bordered">
+      <thead>
+        <th>Nome</th>
+        <th>Idade</th>
+        <th>Est. civil</th>
+        <th>Sexo</th>
+        <th>Email</th>
+        <th>Telefone</th>
+        <th class="text-center">#</th>
+      </thead>
+      <tbody>
+        <tr v-for="curriculo in curriculos">
+          <td>{{curriculo.name}}</td>
+          <td>{{curriculo.idade}}</td>
+          <td>{{Object.values(curriculo.estado_civil)[0]}}</td>
+          <td>{{Object.values(curriculo.sexo)[0]}}</td>
+          <td>{{curriculo.email}}</td>
+          <td>{{curriculo.telefone}}</td>
+          <td class="text-center">
+            <button type="button" class="btn btn-outline-success">Visualizar</button>
+            <button type="button" class="btn btn-outline-warning">Editar</button>
+            <button type="button" class="btn btn-outline-danger">Excluir</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
