@@ -2,9 +2,9 @@ const curriculos = [
   {
     id: 1,
     name: 'Flávio Ribeiro',
-    sexo: {'M': 'Masculino'},
+    sexo: 'M',
     idade: 22,
-    estado_civil: {'C': 'Casado'},
+    estado_civil: 'C',
     email: 'flavioribeirojr@outlook.com',
     telefone: '98991198473',
     descricao: 'lorem ipsum dolor sit amet.',
@@ -32,9 +32,9 @@ const curriculos = [
   {
     id: 2,
     name: 'Bernardo Lopes Lima',
-    sexo: {'M': 'Masculino'},
+    sexo: 'M',
     idade: 1,
-    estado_civil: {'S': 'Solteiro'},
+    estado_civil: 'S',
     email: 'bernardo@outlook.com',
     telefone: '98991198473',
     descricao: 'lorem ipsum dolor sit amet.',

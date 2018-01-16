@@ -8,7 +8,7 @@
 </style>
 
 <template>
-  <div>
+  <div class="container">
     <transition name="fadeLeft" mode="out-in">
       <router-view></router-view>
     </transition>

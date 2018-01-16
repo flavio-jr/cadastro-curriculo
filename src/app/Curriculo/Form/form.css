@@ -1,0 +1,17 @@
+.form-row h5 {
+    padding-left: 5px;
+    width: 100%;
+    border-bottom: 1px solid #dfdfdf;
+    padding-bottom: 5px;
+    margin-bottom: 15px;
+}
+
+.card {
+    max-height: 500px;
+    overflow: hidden;
+}
+
+.disacople {
+    position: absolute;
+    opacity: 0.2;
+}

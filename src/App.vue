@@ -12,7 +12,7 @@ export default {
 
 <style>
 @import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
-@import "../node_modules/vue2-animate/dist/vue2-animate.min.css";
+@import "../node_modules/animate.css/animate.min.css";
 
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
