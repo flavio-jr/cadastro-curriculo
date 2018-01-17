@@ -6,8 +6,7 @@
   </div>
   <div class="card">
       <div class="card-body">
-        <form>
-        <transition-group 
+        <transition-group
           name="custom-classes-transition"
           leave-to-class="disacople"
           :enter-active-class="getInEffect"
@@ -18,70 +17,169 @@
             <h5>Informações pessoais</h5>
             <div class="form-group col-md-6">
               <label>Nome*</label>
-              <input type="text" class="form-control" placeholder="Seu nome completo">
+              <input 
+                type="text" 
+                class="form-control" 
+                placeholder="Seu nome completo"
+                v-model="curriculo.pessoal.name"
+                v-validate="'required'"
+                :class="{'is-invalid': errors.has('name')}"
+                data-vv-name="name"
+              />
+              <p v-if="errors.has('name')" class="invalid-feedback">{{errors.first('name')}}</p>
             </div>
             <div class="form-group col-md-2">
-              <label>Idade</label>
-              <input type="number" class="form-control" min="1">
+              <label>Idade*</label>
+              <input 
+                type="number" 
+                class="form-control" 
+                min="1"
+                v-model="curriculo.pessoal.idade"
+                v-validate="'required|min_value:16'"
+                :class="{'is-invalid': errors.has('idade')}"
+                data-vv-name="idade"
+              />
+              <p v-if="errors.has('idade')" class="invalid-feedback">{{errors.first('idade')}}</p>
             </div>
             <div class="form-group col-md-2">
               <label>Estado civil*</label>
-              <select class="form-control">
+              <select
+                class="form-control"
+                v-model="curriculo.pessoal.estado_civil"
+                v-validate="'required'"
+                :class="{'is-invalid': errors.has('estado_civil')}"
+                data-vv-name="estado_civil"
+              >
                 <option value="" disabled hidden selected>Selecione</option>
                 <option v-for="(estado, sigla) in estadosCivis" :value="sigla">{{estado}}</option>
               </select>
+              <p v-if="errors.has('estado_civil')" class="invalid-feedback">{{errors.first('estado_civil')}}</p>
             </div>
             <div class="form-group col-md-2">
               <label>Sexo*</label>
-              <select class="form-control">
+              <select 
+                class="form-control"
+                v-model="curriculo.pessoal.sexo"
+                v-validate="'required'"
+                :class="{'is-invalid': errors.has('sexo')}"
+                data-vv-name="sexo"
+              >
                 <option value="" disabled hidden selected>Selecione</option>
                 <option v-for="(sexo, sigla) in sexos" :value="sigla">{{sexo}}</option>
               </select>
+              <p v-if="errors.has('sexo')" class="invalid-feedback">{{errors.first('sexo')}}</p>
             </div>
             <div class="form-group col-md-3">
-              <label>Telefone</label>
-              <input type="tel" class="form-control" placeholder="(99) 99999-9999">
+              <label>Telefone*</label>
+              <input 
+                type="tel" 
+                class="form-control" 
+                placeholder="(99) 99999-9999"
+                v-model="curriculo.pessoal.telefone"
+                v-mask="'(##) #####-####'"
+                v-validate="{required: true, regex: /(\(\d\d\))\s\d{5}-\d{4}/}"
+                :class="{'is-invalid': errors.has('telefone')}"
+                data-vv-name="telefone"
+              />
+              <p v-if="errors.has('telefone')" class="invalid-feedback">{{errors.first('telefone')}}</p>
             </div>
             <div class="form-group col-md-3">
               <label>Email*</label>
-              <input type="email" class="form-control" placeholder="example@youremail.com">
+              <input 
+                type="email" 
+                class="form-control" 
+                placeholder="example@youremail.com"
+                v-model="curriculo.pessoal.email"
+                v-validate="'required|email'"
+                :class="{'is-invalid': errors.has('email')}"
+                data-vv-name="email"
+              />
+              <p v-if="errors.has('email')" class="invalid-feedback">{{errors.first('email')}}</p>
             </div>
             <div class="form-group col-md-12">
               <label>Descrição</label>
               <textarea class="form-control" rows="3" placeholder="Descreva seu perfil"></textarea>
             </div>
             <div class="col-md-12 text-right">
-                <button type="button" class="btn btn-primary" @click="setPage(2, 'N')">Continuar</button>
+                <button type="button" class="btn btn-primary" @click="validateInformacaoPessoal">Continuar</button>
             </div>
           </div>
           <div class="form-row" v-if="page == 2" key="p2">
             <h5>Endereço</h5>
             <div class="form-group col-md-3">
               <label>País*</label>
-              <input type="text" class="form-control" disabled value="Brasil">
+              <input 
+                type="text" 
+                class="form-control" 
+                disabled 
+                value="Brasil"
+              />
             </div>
             <div class="form-group col-md-4">
               <label>Estado*</label>
-              <select class="form-control">
+              <select 
+                class="form-control"
+                v-model="curriculo.endereco.estado"
+                v-validate="'required'"
+                data-vv-name="estado"
+                :class="{'is-invalid': errors.has('estado')}"
+              >
                 <option value="" disabled hidden selected>Selecione</option>
                 <option v-for="estado in estados" :value="estado.sigla">{{estado.nome}}</option>
               </select>
+              <p v-if="errors.has('estado')" class="invalid-feedback">{{errors.first('estado')}}</p>
             </div>
             <div class="form-group col-md-5">
               <label>Cidade*</label>
-              <input type="text" class="form-control" placeholder="Ex.: São Luís">
+              <input 
+                type="text" 
+                class="form-control" 
+                placeholder="Ex.: São Luís"
+                v-model="curriculo.endereco.cidade"
+                v-validate="'required'"
+                :class="{'is-invalid': errors.has('cidade')}"
+                data-vv-name="cidade"
+              />
+              <p v-if="errors.has('cidade')" class="invalid-feedback">{{errors.first('cidade')}}</p>
             </div>
             <div class="form-group col-md-5">
               <label>Logradouro*</label>
-              <input type="text" class="form-control" placeholder="Ex.: Av. Melo Povoas">
+              <input 
+                type="text" 
+                class="form-control" 
+                placeholder="Ex.: Av. Melo Povoas"
+                v-model="curriculo.endereco.logradouro"
+                v-validate="'required'"
+                :class="{'is-invalid': errors.has('logradouro')}"
+                data-vv-name="logradouro"
+              />
+              <p v-if="errors.has('logradouro')" class="invalid-feedback">{{errors.first('logradouro')}}</p>
             </div>
             <div class="form-group col-md-3">
               <label>Bairro*</label>
-              <input type="text" class="form-control" placeholder="Ex.: Cohab">
+              <input 
+                type="text" 
+                class="form-control" 
+                placeholder="Ex.: Cohab"
+                v-model="curriculo.endereco.bairro"
+                v-validate="'required'"
+                :class="{'is-invalid': errors.has('bairro')}"
+                data-vv-name="bairro"
+              />
+              <p v-if="errors.has('bairro')" class="invalid-feedback">{{errors.first('bairro')}}</p>
             </div>
             <div class="form-group col-md-2">
               <label>Número</label>
-              <input type="text" class="form-control" placeholder="Ex.: 17">
+              <input 
+                type="text" 
+                class="form-control"
+                placeholder="Ex.: 17"
+                v-model="curriculo.endereco.numero"
+                v-validate="'required'"
+                :class="{'is-invalid': errors.has('numero')}"
+                data-vv-name="numero"
+              />
+              <p v-if="errors.has('numero')" class="invalid-feedback">{{errors.first('numero')}}</p>
             </div>
             <div class="form-group col-md-12">
               <label>Complemento</label>
@@ -89,11 +187,46 @@
             </div>
             <div class="col-md-12 text-right">
               <button type="button" class="btn btn-secondary" @click="setPage(1, 'B')">Voltar</button>
-              <button type="button" class="btn btn-success">Concluir</button>
+              <button type="button" class="btn btn-success" @click="validateInformacaoEndereco">Concluir</button>
+            </div>
+          </div>
+          <div class="row info" v-if="page == 3" key="p3">
+            <div class="col-md-4">
+              <dinamic-list 
+                title="Formação" 
+                v-model="curriculo.info.formacoes" 
+                slug="form"
+                msg="Adicione sua formação acadêmica"
+                icon="fa fa-book"
+              >
+              </dinamic-list>
+            </div>
+            <div class="col-md-4">
+              <dinamic-list 
+                title="Habilidades" 
+                v-model="curriculo.info.habilidades" 
+                slug="hab"
+                icon="fa fa-wrench"
+                msg="Informe suas habilidades"
+              >
+            </dinamic-list>
+            </div>
+            <div class="col-md-4">
+              <dinamic-list 
+                title="Experiências" 
+                v-model="curriculo.info.experiencias" 
+                slug="exp"
+                icon="fa fa-handshake-o"
+                msg="Informe suas experiências em trabalhos anteriores"
+              >
+              </dinamic-list>
+            </div>
+            <div class="col-md-12 text-right btn-down">
+              <button type="button" class="btn btn-secondary" @click="setPage(2, 'B')">Voltar</button>
+              <button type="button" class="btn btn-success" @click="validateInformacaoEndereco">Concluir</button>
             </div>
           </div>
         </transition-group>
-        </form>
       </div>
     </div>
 </div>

@@ -9,7 +9,11 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'Curriculo',
+      redirect: '/curriculos'
+    },
+    {
+      path: '/curriculos/',
+      name: 'Curriculos',
       component: Main,
       children: curriculoRoutes
     }

@@ -1,0 +1,43 @@
+<div class="card">
+  <div class="card-body">
+    <div class="col-md-12 add">
+      <h6>{{title}}</h6>
+      <input
+        type="text"
+        class="form-control"
+        v-model="currentInput"
+        @keyup.enter="addItem"
+      />
+    </div>
+    <div class="col-md-12">
+      <ul class="list-group" v-if="list.length">
+        <li
+          v-for="(item, index) in list" 
+          class="list-group-item d-flex justify-content-between align-items-center"
+          :id="slug + index"
+        >
+          <span>{{ item }}</span>
+          <b-popover 
+            :target="slug + index" 
+            triggers="click"
+            placement="bottomleft"
+          >
+            <template slot="title">Editar <small><b>(clique)</b> para cancelar</small></template>
+            <textarea
+              class="form-control"
+              v-model="list[index]"
+              @change="emitEditChange"
+              @keydown.prevent.enter="$root.$emit('bv::hide::popover', slug + index)"
+            >
+            </textarea>
+          </b-popover>
+          <span class="clickable badge badge-danger badge-pill" @click="removeItem(index)">x</span>
+        </li>
+      </ul>
+      <div v-else class="empty-list text-center">
+        <h1 class="empty-list-icon"><i :class="icon"></i></h1>
+        <span class="empty-list-msg">{{msg}}</span>
+      </div>
+    </div>
+  </div>
+</div>

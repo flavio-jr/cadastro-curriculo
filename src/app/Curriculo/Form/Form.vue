@@ -1,24 +1,53 @@
 <script>
 import curriculoService from '../Services/curriculos.service'
+import DinamicList from '@/components/DinamicList/DinamicList'
 
 export default {
+  components: {
+    DinamicList
+  },
+
   data () {
     return {
-      page: 1,
+      page: 3,
       direction: 'N',
       sexos: [],
       estadosCivis: [],
-      estados: []
+      estados: [],
+      curriculo: {
+        pessoal: {
+          name: '',
+          idade: '',
+          sexo: '',
+          estado_civil: '',
+          telefone: '',
+          email: '',
+          descricao: ''
+        },
+        endereco: {
+          estado: '',
+          cidade: '',
+          logradouro: '',
+          bairro: '',
+          numero: '',
+          referencia: ''
+        },
+        info: {
+          formacoes: [],
+          experiencias: [],
+          habilidades: []
+        }
+      }
     }
   },
 
   computed: {
     getEffect () {
-      return this.direction == 'N' ? 'animated fadeOutLeftBig' : 'animated fadeOutRightBig'
+      return this.direction === 'N' ? 'animated fadeOutLeftBig' : 'animated fadeOutRightBig'
     },
 
     getInEffect () {
-      return this.direction == 'N' ? 'animated fadeInRight' : 'animated fadeInLeftBig'
+      return this.direction === 'N' ? 'animated fadeInRight' : 'animated fadeInLeftBig'
     }
   },
 
@@ -26,6 +55,44 @@ export default {
     setPage (page, direction) {
       this.page = page
       this.direction = direction
+    },
+
+    validateInformacaoPessoal () {
+      this.$validator.validateAll(this.curriculo.pessoal).then((pass) => {
+        if (!pass) return
+
+        this.setPage(2, 'N')
+      })
+    },
+
+    validateInformacaoEndereco () {
+      this.$validator.validateAll(this.curriculo.endereco).then((pass) => {
+        if (!pass) return
+
+        this.setPage(3, 'N')
+      })
+    },
+
+    addFormacao () {
+      if (!this.curriculo.info.formacao) return
+
+      this.curriculo.info.formacoes.push(this.curriculo.info.formacao)
+      this.curriculo.info.formacao = ''
+    },
+
+    removeFormacao (index) {
+      this.curriculo.info.formacoes.splice(index, 1)
+    },
+
+    addHabilidade () {
+      if (!this.curriculo.info.habilidade) return
+
+      this.curriculo.info.habilidades.push(this.curriculo.info.habilidade)
+      this.curriculo.info.habilidade = ''
+    },
+
+    removeHabilidade (index) {
+      this.curriculo.info.habilidades.splice(index, 1)
     }
   },
 

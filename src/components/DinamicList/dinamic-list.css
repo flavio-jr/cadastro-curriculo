@@ -1,0 +1,23 @@
+.add {
+  margin-bottom: 15px;
+}
+
+.row .card {
+  height: 350px;
+  overflow-y: scroll;
+}
+
+.popover-header small {
+  float: right;
+  font-size: 0.6em;
+  color: #5a5959;
+}
+
+.empty-list-icon {
+  font-size: 8em;
+  color: #cecece;
+}
+
+.empty-list-msg {
+  color: #969292;
+}

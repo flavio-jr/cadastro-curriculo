@@ -13,6 +13,7 @@ export default {
 <style>
 @import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
 @import "../node_modules/animate.css/animate.min.css";
+@import "../node_modules/font-awesome/css/font-awesome.css";
 
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;

@@ -15,3 +15,12 @@
     position: absolute;
     opacity: 0.2;
 }
+
+.info .col-md-12 {
+    padding: 0;
+}
+
+.btn-down {
+    margin-top: 40px;
+    padding-right: 14px!important;
+}

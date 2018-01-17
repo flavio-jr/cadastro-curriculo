@@ -3,12 +3,12 @@ import Form from './Form/Form'
 
 const curriculoRoutes = [
   {
-    path: '/',
+    path: '',
     name: 'ListCurriculos',
     component: List
   },
   {
-    path: '/create',
+    path: 'create',
     name: 'CreateCurriculo',
     component: Form
   }
